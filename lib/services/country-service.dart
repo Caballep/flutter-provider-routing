@@ -5,19 +5,23 @@ class CountryService {
     List<Country> countries = List<Country>();
     countries
     ..add(
-      Country('China', 'Here resides the magical Aliexpress', 
+      Country('China', 
+      'Here resides the magical Aliexpress from where Jose gets all the stuff he orders online... price/quality you can get from here is just awesome.', 
       'https://www.cia.gov/library/publications/the-world-factbook/attachments/flags/CH-flag.gif'),
     )
     ..add(
-      Country('India', 'Population is measured in Engineers per square meter', 
+      Country('India', 
+      'Population is measured in Engineers per square meter, without India the world flavores would be pretty much tasteless.', 
       'https://www.cia.gov/library/publications/the-world-factbook/attachments/flags/IN-flag.gif'),
     )
     ..add(
-      Country('Mexico', 'The land of true tacos... AYAYAYAYAI', 
+      Country('Mexico', 
+      'The land of true tacos AYAYAYAYAI... some people may say that Mexico is not part of North America, but it is!', 
       'https://www.cia.gov/library/publications/the-world-factbook/attachments/flags/MX-flag.gif'),
     )
     ..add(
-      Country('USA', 'Diversity at its best!', 
+      Country('USA', 
+      'Diversity at its best!, The land of freedom it is said... currently abducted by a hairy carrot.', 
       'https://www.cia.gov/library/publications/the-world-factbook/attachments/flags/US-flag.gif'),
     );
     return countries;

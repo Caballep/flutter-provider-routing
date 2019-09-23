@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider_example/models/country.dart';
+import 'package:provider_example/pages/country-details.dart';
 import 'package:provider_example/pages/routes.dart';
 
 class CountryItem extends StatelessWidget {
-  final String _countryName, _countryFlagUrl;
-  CountryItem(this._countryName, this._countryFlagUrl);
+  Country _country;
+  CountryItem(this._country);
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +17,17 @@ class CountryItem extends StatelessWidget {
         countryItemFontSize = 30,
         likeDislikeButtonSize = 40,
         countryTextWidth =
-            screenWidth - (countryFlagWidth + (likeDislikeButtonSize * 3));
+        screenWidth - (countryFlagWidth + (likeDislikeButtonSize * 3));
+        
 
     return InkWell(
-      onTap: () { Navigator.pushNamed(context, Routes.countryDetails);},
+      onTap: () {
+        Navigator.pushNamed(context, Routes.countryDetails,
+            arguments: CountryDetailsArguments(_country));
+      },
       child: Container(
+        decoration: BoxDecoration(
+            border: Border(bottom: BorderSide(color: Colors.grey))),
         height: countryItemHeight,
         width: countryItemWidth,
         child: Row(
@@ -28,32 +36,31 @@ class CountryItem extends StatelessWidget {
               padding: EdgeInsets.only(left: 10.0),
               width: countryFlagWidth,
               height: countryFlagHeight,
-              child: Image.network(_countryFlagUrl),
+              child: Image.network(_country.flagImageUrl),
             ),
             Container(
               padding: EdgeInsets.only(left: 10.0),
               width: countryTextWidth,
               child: Text(
-                _countryName,
+                _country.name,
                 style: TextStyle(fontSize: countryItemFontSize),
               ),
             ),
             GestureDetector(
               onTap: () => {},
               child: IconButton(
-              iconSize: likeDislikeButtonSize,
-              icon: Icon(Icons.thumb_up),
-              color: Colors.grey,
+                iconSize: likeDislikeButtonSize,
+                icon: Icon(Icons.thumb_up),
+                color: Colors.grey,
+              ),
             ),
-            ) ,
-            
             GestureDetector(
               onTap: () => {},
               child: IconButton(
-              iconSize: likeDislikeButtonSize,
-              icon: Icon(Icons.thumb_down),
-              color: Colors.grey,
-            ),
+                iconSize: likeDislikeButtonSize,
+                icon: Icon(Icons.thumb_down),
+                color: Colors.grey,
+              ),
             )
           ],
         ),
