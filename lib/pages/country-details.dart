@@ -15,7 +15,7 @@ class CountryDetails extends StatelessWidget {
       appBar: AppBar(
         title: Text("Country Details"),
       ),
-      body: Container(
+      body: SingleChildScrollView(
           child: Column(
         children: <Widget>[
           Align(
@@ -26,34 +26,45 @@ class CountryDetails extends StatelessWidget {
               child: Image.network(fromHomePageArgs.country.flagImageUrl),
             ),
           ),
-          Center(
-            child: Container(
-              padding: EdgeInsets.only(top: flagPaddingTop),
-              width: flagWidth,
-              child: Text(
-                fromHomePageArgs.country.name,
-                style: TextStyle(
-                  fontSize: 50.0
-                ),
-              )
-            ),
-          ),
           Container(
               padding: EdgeInsets.only(top: flagPaddingTop),
               width: flagWidth,
               child: Text(
+                fromHomePageArgs.country.name,
+                style: TextStyle(fontSize: 50.0),
+              )),
+          Container(
+              padding: EdgeInsets.only(top: flagPaddingTop, bottom: 15.0),
+              width: flagWidth,
+              child: Text(
                 fromHomePageArgs.country.description,
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.blue
+                style: TextStyle(fontSize: 20.0, color: Colors.blue),
+              )),
+          Divider(),
+          Container(
+            padding: EdgeInsets.only(left: 20.0, top: 15.0),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Leave a friendly commet: ',
+                style: TextStyle(fontSize: 18.0),
+              ),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 20.0, right: 15.0),
+            child: Column(children: <Widget>[
+              TextField(),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: FlatButton(
+                  color: Colors.lightBlue,
+                  child: Text('Submit'),
+                  onPressed: () => {},
                 ),
               )
-            ),
-            Expanded(
-              child: Container(
-                child: Text('Leave a commet: '),
-              ),
-            )
+            ]),
+          )
         ],
       )),
     );
