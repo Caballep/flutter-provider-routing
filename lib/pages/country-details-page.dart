@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider_example/models/country.dart';
 
-class CountryDetails extends StatelessWidget {
+class CountryDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final CountryDetailsArguments fromHomePageArgs =
+    final CountryDetailsPageArguments fromHomePageArgs =
         ModalRoute.of(context).settings.arguments;
 
     double screenWidth = MediaQuery.of(context).size.width,
@@ -71,8 +71,8 @@ class CountryDetails extends StatelessWidget {
   }
 }
 
-class CountryDetailsArguments {
+class CountryDetailsPageArguments {
   Country country;
 
-  CountryDetailsArguments(this.country);
+  CountryDetailsPageArguments(this.country);
 }

@@ -1,13 +1,21 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:provider_example/models/country.dart';
+import 'package:provider_example/providers/home-provider.dart';
 import 'package:provider_example/services/country-service.dart';
 import 'package:provider_example/widgets/country-item.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    CountryService countryService = CountryService();
-    List<Country> countries = countryService.getCountries();
+    bool justCreated = true;
+    final CountryService _countryService = CountryService();
+    final List<Country> _countries = _countryService.getCountries();
+    final _homeProvider = Provider.of<HomeProvider>(context);
+
+
 
     return Scaffold(
         appBar: AppBar(
@@ -28,10 +36,10 @@ class HomePage extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                  itemCount: countries.length,
+                  itemCount: _countries.length,
                   itemBuilder: (BuildContext buildContext, int index) {
                     return CountryItem(
-                        countries[index]);
+                        _countries[index]);
                   }),
             ),
             Row(

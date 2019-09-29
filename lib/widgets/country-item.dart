@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider_example/models/country.dart';
-import 'package:provider_example/pages/country-details.dart';
+import 'package:provider_example/pages/country-details-page.dart';
 import 'package:provider_example/pages/routes.dart';
 
 class CountryItem extends StatelessWidget {
@@ -19,11 +19,27 @@ class CountryItem extends StatelessWidget {
         countryTextWidth =
         screenWidth - (countryFlagWidth + (likeDislikeButtonSize * 3));
         
+    Color likeColor, dislikeColor;
+
+    if(_country.likeDislike == 0) {
+      likeColor = Colors.grey;
+      dislikeColor = Colors.grey;
+    }
+
+    if(_country.likeDislike == 1) {
+      likeColor = Colors.green;
+      dislikeColor = Colors.grey;
+    }
+
+    if(_country.likeDislike == 2) {
+      likeColor = Colors.grey;
+      dislikeColor = Colors.red;
+    }
 
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, Routes.countryDetails,
-            arguments: CountryDetailsArguments(_country));
+            arguments: CountryDetailsPageArguments(_country));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -51,7 +67,7 @@ class CountryItem extends StatelessWidget {
               child: IconButton(
                 iconSize: likeDislikeButtonSize,
                 icon: Icon(Icons.thumb_up),
-                color: Colors.grey,
+                color: likeColor,
               ),
             ),
             GestureDetector(
@@ -59,7 +75,7 @@ class CountryItem extends StatelessWidget {
               child: IconButton(
                 iconSize: likeDislikeButtonSize,
                 icon: Icon(Icons.thumb_down),
-                color: Colors.grey,
+                color: dislikeColor,
               ),
             )
           ],
