@@ -10,12 +10,8 @@ import 'package:provider_example/widgets/country-item.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    bool justCreated = true;
-    final CountryService _countryService = CountryService();
-    final List<Country> _countries = _countryService.getCountries();
-    final _homeProvider = Provider.of<HomeProvider>(context);
-
-
+    HomeProvider _homeProvider = Provider.of<HomeProvider>(context);
+    _homeProvider.initializeProvider();
 
     return Scaffold(
         appBar: AppBar(
@@ -36,10 +32,11 @@ class HomePage extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                  itemCount: _countries.length,
+                  itemCount: _homeProvider.countries.length,
                   itemBuilder: (BuildContext buildContext, int index) {
                     return CountryItem(
-                        _countries[index]);
+                        index,
+                        _homeProvider.countries[index]);
                   }),
             ),
             Row(
@@ -48,7 +45,7 @@ class HomePage extends StatelessWidget {
                     padding: EdgeInsets.all(5.0),
                     child: Text('Last checked country was: ',
                         style: TextStyle(fontWeight: FontWeight.bold))),
-                Container(padding: EdgeInsets.all(10.0), child: Text('China')),
+                Container(padding: EdgeInsets.all(10.0), child: Text(_homeProvider.lastCheckedCountry)),
               ],
             ),
             Column(

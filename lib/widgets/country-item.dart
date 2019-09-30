@@ -1,14 +1,22 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:provider_example/models/country.dart';
 import 'package:provider_example/pages/country-details-page.dart';
 import 'package:provider_example/pages/routes.dart';
+import 'package:provider_example/providers/home-provider.dart';
 
 class CountryItem extends StatelessWidget {
+  final String _wlog = 'CountryItem';
+  int _index;
   Country _country;
-  CountryItem(this._country);
+  CountryItem(this._index, this._country);
 
   @override
   Widget build(BuildContext context) {
+    HomeProvider _homeProvider = Provider.of<HomeProvider>(context);
+
     double screenWidth = MediaQuery.of(context).size.width,
         countryItemHeight = 80.0,
         countryItemWidth = screenWidth,
@@ -62,22 +70,45 @@ class CountryItem extends StatelessWidget {
                 style: TextStyle(fontSize: countryItemFontSize),
               ),
             ),
+            Spacer(),
             GestureDetector(
-              onTap: () => {},
-              child: IconButton(
-                iconSize: likeDislikeButtonSize,
-                icon: Icon(Icons.thumb_up),
+              onTap: () => {
+                log('$_wlog thumbsUp Tapped'),
+                _homeProvider.setCountry(_index, 
+                  Country(
+                    _country.name,
+                    _country.description,
+                    _country.flagImageUrl,
+                    1
+                  )
+                )
+              },
+              child: Icon(
+                Icons.thumb_up,
+                size: likeDislikeButtonSize,
                 color: likeColor,
               ),
             ),
+            Spacer(),
             GestureDetector(
-              onTap: () => {},
-              child: IconButton(
-                iconSize: likeDislikeButtonSize,
-                icon: Icon(Icons.thumb_down),
+              onTap: () => {
+                log('$_wlog thumbsDown Tapped'),
+                _homeProvider.setCountry(_index, 
+                  Country(
+                    _country.name,
+                    _country.description,
+                    _country.flagImageUrl,
+                    2
+                  )
+                )
+              },
+              child: Icon(
+                Icons.thumb_down,
+                size: likeDislikeButtonSize,
                 color: dislikeColor,
               ),
-            )
+            ),
+            Spacer(),
           ],
         ),
       ),
